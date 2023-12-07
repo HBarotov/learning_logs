@@ -1,0 +1,21 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+    <h1>Topics</h1>
+{% endblock page_header %}
+
+{% block content %}
+    <ul class="list-group border-bottom pb-2 mb-4">
+        {% for topic in topics %}
+            <li class="list-group-item border-0">
+                <a href="{% url 'learning_logs:topic' topic.id %}" class="lead">{{ topic.text }}</a> &middot; {{ topic.date_added|date:'M d, Y' }} &middot; 
+                <a href="{% url 'learning_logs:edit_topic' topic.id %}">Edit topic</a> &middot; 
+                <a href="{% url 'learning_logs:delete_topic' topic.id %}">Delete topic</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item border-0">No topics yet</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'learning_logs:new_topic' %}">Add new topic</a>
+{% endblock content %}
